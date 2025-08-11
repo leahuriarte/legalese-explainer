@@ -1,9 +1,7 @@
 # legalese-explainer
-# Legalese - AI Legal Document Analyzer
+# Legalese Explainer - AI Legal Document Analyzer
 
 > Transform complex legal documents into plain English with AI-powered analysis
-
-![Legalese App Screenshot](https://via.placeholder.com/800x400/000000/FFFFFF?text=Legalese+Legal+Analyzer)
 
 ## What It Does
 
