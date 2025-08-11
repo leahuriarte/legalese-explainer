@@ -1,0 +1,103 @@
+{
+  "app": {
+    "name": "Legalese",
+    "version": "1.0.0",
+    "description": "AI-powered legal document analysis and translation platform"
+  },
+  "api": {
+    "baseUrl": "http://localhost:3001",
+    "endpoints": {
+      "explain": "/api/explain",
+      "upload": "/api/upload",
+      "health": "/api/health"
+    },
+    "timeout": 30000,
+    "retryAttempts": 3
+  },
+  "fileProcessing": {
+    "maxFileSize": 10485760,
+    "allowedTypes": ["application/pdf"],
+    "previewLength": 400,
+    "chunkSize": 1000000
+  },
+  "ui": {
+    "theme": {
+      "colors": {
+        "primary": "#000000",
+        "secondary": "#ffffff",
+        "accent": "#999999",
+        "background": "#ffffff",
+        "text": "#000000",
+        "border": "#000000",
+        "error": "#cc0000"
+      },
+      "fonts": {
+        "primary": "'Helvetica Neue', 'Arial', sans-serif",
+        "mono": "'Courier New', monospace"
+      },
+      "spacing": {
+        "xs": "0.5rem",
+        "sm": "1rem",
+        "md": "2rem",
+        "lg": "3rem",
+        "xl": "4rem"
+      }
+    },
+    "animations": {
+      "duration": "0.3s",
+      "easing": "ease-out"
+    },
+    "breakpoints": {
+      "mobile": "768px",
+      "tablet": "1024px",
+      "desktop": "1200px"
+    }
+  },
+  "features": {
+    "dragAndDrop": true,
+    "copyToClipboard": true,
+    "downloadResults": true,
+    "filePreview": true,
+    "keyboardNavigation": true,
+    "responsiveDesign": true,
+    "printStyles": true,
+    "accessibilityFeatures": true
+  },
+  "analytics": {
+    "enabled": false,
+    "trackingId": "",
+    "events": [
+      "file_upload",
+      "analysis_complete",
+      "copy_text",
+      "download_results",
+      "error_occurred"
+    ]
+  },
+  "security": {
+    "allowedOrigins": ["http://localhost:3000", "http://localhost:3001"],
+    "csrfProtection": true,
+    "sanitizeInput": true,
+    "maxRequestSize": "50mb"
+  },
+  "performance": {
+    "enableGzip": true,
+    "cacheStaticAssets": true,
+    "lazyLoading": false,
+    "prefetchResources": []
+  },
+  "logging": {
+    "level": "info",
+    "enableConsoleLog": true,
+    "enableRemoteLogging": false,
+    "logErrors": true,
+    "logPerformance": true
+  },
+  "metadata": {
+    "author": "Legalese Team",
+    "license": "MIT",
+    "repository": "https://github.com/legalese/app",
+    "documentation": "https://docs.legalese.ai",
+    "support": "support@legalese.ai"
+  }
+}

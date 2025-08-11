@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Suisse+Int\'l:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neue+Haas+Grotesk:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ABC+Favorit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Times+Now:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray-light: #f5f5f5;
+    --gray-medium: #999999;
+    --gray-dark: #333333;
+    --border: 1px solid #000000;
+    --border-light: 1px solid #e0e0e0;
+}
+
+body {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.4;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+}
+
+/* Header */
+.header {
+    padding: 2rem 3rem;
+    border-bottom: var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.header-info {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-align: right;
+    line-height: 1.2;
+    color: var(--gray-medium);
+}
+
+/* Main Layout */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 120px);
+}
+
+.left-panel {
+    padding: 4rem 3rem 3rem 3rem;
+    border-right: var(--border);
+}
+
+.right-panel {
+    padding: 4rem 3rem 3rem 3rem;
+}
+
+/* Typography */
+.title {
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem;
+    color: var(--gray-medium);
+}
+
+.description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    font-weight: 300;
+}
+
+/* Upload Section */
+.upload-area {
+    border: 2px solid var(--black);
+    padding: 4rem 2rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    background: var(--white);
+}
+
+.upload-area:hover {
+    background: var(--gray-light);
+}
+
+.upload-area.dragover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.upload-instruction {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.upload-meta {
+    font-size: 0.7rem;
+    color: var(--gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: var(--border);
+    background: var(--white);
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1.5rem;
+    font-family: inherit;
+}
+
+.btn:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+/* File Status */
+.file-status {
+    border: var(--border-light);
+    padding: 2rem;
+    margin-top: 2rem;
+    display: none;
+}
+
+.file-status.active {
+    display: block;
+}
+
+.file-name {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+.file-details {
+    font-size: 0.7rem;
+    color: var(--gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+
+.file-preview {
+    background: var(--gray-light);
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+    border: var(--border-light);
+}
+
+/* Results */
+.results-container {
+    min-height: 400px;
+    position: relative;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    text-align: center;
+    border: var(--border-light);
+}
+
+.empty-text {
+    font-size: 0.8rem;
+    color: var(--gray-medium);
+    max-width: 300px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--gray-light);
+    border-top: 1px solid var(--black);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 2rem;
+}
+
+.loading-text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gray-medium);
+}
+
+/* Explanation */
+.explanation {
+    padding: 2rem 0;
+    line-height: 1.6;
+    border-top: var(--border);
+}
+
+.explanation h1,
+.explanation h2,
+.explanation h3 {
+    font-weight: 400;
+    margin: 2.5rem 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.explanation h1 {
+    font-size: 1.5rem;
+}
+
+.explanation h2 {
+    font-size: 1.2rem;
+}
+
+.explanation h3 {
+    font-size: 1rem;
+}
+
+.explanation p {
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+}
+
+.explanation ul {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.explanation li {
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+}
+
+.explanation strong {
+    font-weight: 500;
+}
+
+/* Error */
+.error-message {
+    border: var(--border);
+    padding: 2rem;
+    margin-top: 2rem;
+    background: var(--gray-light);
+}
+
+.error-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.error-text {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+/* Action Bar */
+.action-bar {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: var(--border-light);
+}
+
+/* Hero Image */
+.hero-image {
+    width: 100%;
+    height: 300px;
+    background: url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    margin-bottom: 3rem;
+    border: var(--border);
+    filter: grayscale(100%);
+}
+
+/* Animations */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Hidden */
+.file-input {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 2rem 1.5rem;
+        border-right: none;
+    }
+
+    .left-panel {
+        border-bottom: var(--border);
+    }
+
+    .header {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .hero-image {
+        height: 200px;
+        margin-bottom: 2rem;
+    }
+
+    .upload-area {
+        padding: 3rem 1.5rem;
+    }
+}
+
+/* Focus States */
+.upload-area:focus-within {
+    outline: 2px solid var(--black);
+    outline-offset: 4px;
+}
+
+.btn:focus {
+    outline: 2px solid var(--black);
+    outline-offset: 4px;
+}
+
+/* Print Styles */
+@media print {
+    .header,
+    .upload-area,
+    .action-bar {
+        display: none;
+    }
+    
+    .main-container {
+        display: block;
+    }
+    
+    .left-panel,
+    .right-panel {
+        border: none;
+        padding: 1rem;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --gray-medium: #666666;
+        --border-light: var(--border);
+    }
+}
+
+/* Typography refinements */
+.mono {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.caps {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.small-caps {
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+}

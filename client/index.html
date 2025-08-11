@@ -3,448 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legalese Explainer</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --background: #ecf0f1;
-            --card-bg: #ffffff;
-            --text: #2c3e50;
-            --text-light: #7f8c8d;
-            --border: #bdc3c7;
-            --success: #27ae60;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .app-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-
-        .upload-section {
-            border: 2px dashed var(--border);
-            border-radius: 10px;
-            padding: 40px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            background-color: #f8f9fa;
-        }
-
-        .upload-section:hover {
-            border-color: var(--secondary);
-            background-color: #e3f2fd;
-        }
-
-        .upload-section.dragover {
-            border-color: var(--secondary);
-            background-color: #e3f2fd;
-            transform: scale(1.02);
-        }
-
-        .upload-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .btn {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .btn:disabled {
-            background-color: var(--border);
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-secondary {
-            background-color: var(--success);
-        }
-
-        .btn-secondary:hover {
-            background-color: #229954;
-        }
-
-        .file-info {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e8f5e9;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .file-info span {
-            color: var(--success);
-            font-weight: 500;
-        }
-
-        .explanation-section {
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .explanation-content {
-            background-color: #f5f5f5;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            white-space: pre-wrap;
-            line-height: 1.8;
-        }
-
-        .loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .spinner {
-            border: 3px solid var(--border);
-            border-top: 3px solid var(--secondary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error-message {
-            background-color: #ffebee;
-            color: var(--accent);
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-
-        .api-key-section {
-            margin-bottom: 30px;
-        }
-
-        .api-key-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            font-size: 1rem;
-            margin-top: 10px;
-        }
-
-        .api-key-input:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .extracted-text {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            max-height: 300px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.9rem;
-            border: 1px solid var(--border);
-        }
-    </style>
+    <title>Legalese</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>⚖️ Legalese Explainer</h1>
-        <p>Upload legal documents and get plain English explanations</p>
+    <header class="header">
+        <div class="logo">Legalese</div>
+        <div class="header-info">
+            Document Analysis<br>
+            AI Translation<br>
+            Plain Language
+        </div>
     </header>
 
-    <div class="app-container">
-        <div class="main-content">
-            <div class="card">
-                <h2 class="section-title">📄 Upload Document</h2>
-                <div 
-                    class="upload-section" 
-                    id="uploadSection"
-                    ondrop="handleDrop(event)"
-                    ondragover="handleDragOver(event)"
-                    ondragleave="handleDragLeave(event)"
-                >
-                    <div class="upload-icon">📁</div>
-                    <p>Drag and drop your PDF here or click to browse</p>
-                    <input 
-                        type="file" 
-                        id="fileInput" 
-                        class="file-input" 
-                        accept=".pdf"
-                        onchange="handleFileSelect(event)"
-                    />
-                    <button class="btn" onclick="document.getElementById('fileInput').click()">
-                        Choose File
-                    </button>
+    <main class="main-container">
+        <div class="left-panel">
+            <h1 class="title">WHO IS<br>LEGALESE?</h1>
+            
+            <div class="hero-image"></div>
+            
+            <p class="description">
+                The AI-powered platform creates plain language translations 
+                according to the uniquely unconventional principles 
+                of legal document deconstruction and analysis. 
+                A philosophy in which understanding and clarity 
+                go hand in hand to create explanations that showcase 
+                legal text as an art of meaning rather than a wall of complexity.
+            </p>
+
+            <div class="subtitle">Document Upload</div>
+            
+            <div class="upload-area" 
+                 id="uploadZone"
+                 tabindex="0"
+                 role="button"
+                 aria-label="Upload PDF document"
+                 onclick="document.getElementById('fileInput').click()">
+                
+                <div class="upload-instruction">
+                    Drag and drop your legal document here<br>
+                    or click to select a file
                 </div>
-                <div id="fileInfo"></div>
-                <div id="extractedText"></div>
+                
+                <div class="upload-meta">
+                    PDF files up to 10MB
+                </div>
+                
+                <button class="btn" type="button">
+                    Select Document
+                </button>
+                
+                <input type="file" 
+                       id="fileInput" 
+                       class="file-input" 
+                       accept=".pdf">
             </div>
 
-            <div class="card">
-                <h2 class="section-title">💡 Plain English Explanation</h2>
-                <div class="explanation-section">
-                    <div id="explanationContent">
-                        <p style="color: var(--text-light); text-align: center; padding: 40px;">
-                            Upload a document to get started...
-                        </p>
+            <div class="file-status" id="fileStatus">
+                <div class="file-name" id="fileName"></div>
+                <div class="file-details" id="fileDetails"></div>
+                <div class="file-preview" id="filePreview"></div>
+                <div class="action-bar">
+                    <button class="btn" onclick="clearFile()">
+                        Remove Document
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="subtitle">Analysis Results</div>
+            
+            <div class="results-container" id="resultsContainer">
+                <div class="empty-state">
+                    <div class="empty-text">
+                        Upload a legal document to begin analysis 
+                        and receive a comprehensive plain language 
+                        explanation of all terms and conditions.
                     </div>
                 </div>
-                <button 
-                    id="explainBtn" 
-                    class="btn btn-secondary" 
-                    style="margin-top: 20px; width: 100%;" 
-                    disabled
-                >
-                    Generate Explanation
+            </div>
+
+            <div class="action-bar">
+                <button class="btn" 
+                        id="analyzeBtn" 
+                        disabled
+                        onclick="analyzeDocument()">
+                    Generate Analysis
                 </button>
             </div>
         </div>
-    </div>
+    </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        // Set worker source for PDF.js
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-        let extractedText = '';
-        const BACKEND_URL = 'http://localhost:3001';
-
-        // File handling functions
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById('uploadSection').classList.add('dragover');
-        }
-
-        function handleDragLeave(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById('uploadSection').classList.remove('dragover');
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById('uploadSection').classList.remove('dragover');
-            
-            const files = e.dataTransfer.files;
-            if (files.length > 0 && files[0].type === 'application/pdf') {
-                processFile(files[0]);
-            } else {
-                alert('Please upload a PDF file');
-            }
-        }
-
-        function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (file && file.type === 'application/pdf') {
-                processFile(file);
-            }
-        }
-
-        async function processFile(file) {
-            const fileInfo = document.getElementById('fileInfo');
-            fileInfo.innerHTML = `
-                <div class="file-info">
-                    <span>📄 ${file.name} (${(file.size / 1024).toFixed(2)} KB)</span>
-                    <button class="btn" onclick="clearFile()">Clear</button>
-                </div>
-            `;
-
-            // Extract text from PDF
-            try {
-                const arrayBuffer = await file.arrayBuffer();
-                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-                
-                extractedText = '';
-                
-                for (let i = 1; i <= pdf.numPages; i++) {
-                    const page = await pdf.getPage(i);
-                    const textContent = await page.getTextContent();
-                    const pageText = textContent.items.map(item => item.str).join(' ');
-                    extractedText += pageText + '\n\n';
-                }
-
-                // Show preview of extracted text
-                const preview = extractedText.substring(0, 500) + '...';
-                document.getElementById('extractedText').innerHTML = `
-                    <h3 style="margin-top: 20px; margin-bottom: 10px;">Extracted Text Preview:</h3>
-                    <div class="extracted-text">${preview}</div>
-                `;
-
-                // Enable explain button
-                document.getElementById('explainBtn').disabled = false;
-                
-            } catch (error) {
-                console.error('Error processing PDF:', error);
-                fileInfo.innerHTML = `<div class="error-message">Error processing PDF: ${error.message}</div>`;
-            }
-        }
-
-        function clearFile() {
-            document.getElementById('fileInfo').innerHTML = '';
-            document.getElementById('extractedText').innerHTML = '';
-            document.getElementById('fileInput').value = '';
-            extractedText = '';
-            document.getElementById('explainBtn').disabled = true;
-            document.getElementById('explanationContent').innerHTML = `
-                <p style="color: var(--text-light); text-align: center; padding: 40px;">
-                    Upload a document to get started...
-                </p>
-            `;
-        }
-
-        // Generate explanation using backend API
-        document.getElementById('explainBtn').addEventListener('click', async () => {
-            if (!extractedText) {
-                alert('Please upload a PDF file first');
-                return;
-            }
-
-            const explanationContent = document.getElementById('explanationContent');
-            explanationContent.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/explain`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        text: extractedText
-                    })
-                });
-
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.details || `Server Error: ${response.status}`);
-                }
-
-                const data = await response.json();
-                
-                if (data.success && data.explanation) {
-                    // Convert markdown to HTML for better display
-                    const formattedExplanation = data.explanation
-                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\n\n/g, '</p><p>')
-                        .replace(/\n/g, '<br>');
-                    
-                    explanationContent.innerHTML = `<div class="explanation-content"><p>${formattedExplanation}</p></div>`;
-                } else {
-                    throw new Error('Invalid response from server');
-                }
-
-            } catch (error) {
-                console.error('Error generating explanation:', error);
-                explanationContent.innerHTML = `
-                    <div class="error-message">
-                        Error generating explanation: ${error.message}
-                        <br><br>
-                        Please make sure:
-                        <ul style="margin-top: 10px; padding-left: 20px;">
-                            <li>The backend server is running on port 3001</li>
-                            <li>Your .env file contains a valid GEMINI_API_KEY</li>
-                            <li>You haven't exceeded the API rate limits</li>
-                        </ul>
-                    </div>
-                `;
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
